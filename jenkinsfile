@@ -12,8 +12,28 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-                git "https://github.com/"
+                checkout scm
             }
         }
+        stage('Build') {
+            steps {
+                sh "docker build -t ${IMAGE_NAME} ."
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo Running tests'
+                //sh 'pip install -r requirements.txt'
+                //sh 'pytest'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh "docker run -d -p 5000:5000 ${IMAGE_NAME}"
+            }
+        }
+
     }
 }
