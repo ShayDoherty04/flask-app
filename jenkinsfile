@@ -1,0 +1,19 @@
+//pipeline declaration
+pipeline{
+
+    //agent definition
+    agent any
+
+
+    environment {
+        IMAGE_NAME = "flask-app"
+    }
+
+    stages{
+        stage('checkout'){
+            steps{
+                git "https://github.com/"
+            }
+        }
+    }
+}
