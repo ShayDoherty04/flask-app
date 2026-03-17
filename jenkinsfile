@@ -10,22 +10,24 @@ pipeline{
     }
 
     stages{
-        stage('checkout'){
+        stage('checkout') {
             steps{
                 checkout scm
-            }
-        }
-        stage('Build') {
-            steps {
-                sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
         stage('Test') {
             steps {
                 sh 'echo Running tests'
-                //sh 'python -m pip install -r requirements.txt'
-                //sh 'pytest'
+                sh 'python -m pip install --upgrade pip'
+                sh 'python -m pip install -r requirements.txt'
+                sh 'python -m pytest'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
