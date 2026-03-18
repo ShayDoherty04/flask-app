@@ -2,7 +2,9 @@
 pipeline{
 
     //agent definition
-    agent any
+    agent {
+        docker { image 'python:3.11' } // runs the pipeline inside Python 3.11 container
+    }
 
 
     environment {
