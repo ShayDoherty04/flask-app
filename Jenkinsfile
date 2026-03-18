@@ -3,7 +3,7 @@ pipeline{
 
     //agent definition
     agent {
-        docker { image 'python:3.11' } // runs the pipeline inside Python 3.11 container
+        agent { dockerContainer { image 'python:3.11' } } // runs the pipeline inside Python 3.11 container
     }
 
 
