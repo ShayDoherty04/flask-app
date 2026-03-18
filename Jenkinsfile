@@ -19,9 +19,9 @@ pipeline{
         stage('Test') {
             steps {
                 sh 'echo Running tests'
-                sh 'python -m pip install --upgrade pip'
-                sh 'python -m pip install -r requirements.txt'
-                sh 'python -m pytest'
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'python3 -m pip install -r requirements.txt'
+                sh 'python3 -m pytest'
             }
         }
 
