@@ -45,17 +45,17 @@
 
 pipeline {
     
-
-    agent {
-        docker {
-                image 'docker:24.0-cli'
-                args '''
-                --network jenkins
-                -v jenkins-docker-certs:/certs/client:ro
-                '''
-                reuseNode true
-            }
-        }
+    agent any
+    // agent {
+    //     docker {
+    //             image 'docker:24.0-cli'
+    //             args '''
+    //             --network jenkins
+    //             -v jenkins-docker-certs:/certs/client:ro
+    //             '''
+    //             reuseNode true
+    //         }
+    //     }
 
     stages {
         stage('Smoke') {
