@@ -50,7 +50,7 @@ agent {
         image 'docker:24.0-cli'
         args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
-
+    }
     stages {
         stage('Smoke') {
             steps {
