@@ -46,6 +46,7 @@
 
 
 
+
 pipeline {
   agent none
 
@@ -95,8 +96,7 @@ pipeline {
       agent {
         docker {
           image 'docker:24.0-cli'
-          // Use host Docker daemon via socket mount (Docker Desktop)
-          args '-v //var/run/docker.sock:/var/run/docker.sock'
+          args '--user root -v //var/run/docker.sock:/var/run/docker.sock'
           reuseNode true
         }
       }
@@ -110,24 +110,20 @@ pipeline {
       agent {
         docker {
           image 'docker:24.0-cli'
-          // Use host Docker daemon so ports bind to localhost
-          args '-v //var/run/docker.sock:/var/run/docker.sock'
+          args '--user root -v //var/run/docker.sock:/var/run/docker.sock'
           reuseNode true
         }
       }
       steps {
         sh '''
           set -e
-          # Stop any previous instance
           docker ps -aqf "name=^flask-app$" | xargs -r docker rm -f || true
-          # Run mapped to localhost:5000
           docker run -d --name flask-app -p 5000:5000 "$IMAGE_NAME"
           docker ps
         '''
       }
     }
-
-  } // end stages
-
-} // end pipelin
+  }
+}
+ // end pipelin
 
