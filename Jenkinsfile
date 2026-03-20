@@ -89,13 +89,8 @@ pipeline {
         docker {
           image 'docker:24.0-cli'
           // Connect to the dind sidecar over TLS on the 'jenkins' network
-          args '''
-            --network jenkins
-            -e DOCKER_HOST=tcp://docker:2376
-            -e DOCKER_CERT_PATH=/certs/client
-            -e DOCKER_TLS_VERIFY=1
-            -v jenkins-docker-certs:/certs/client:ro
-          '''
+          args '--network jenkins -e DOCKER_HOST=tcp://docker:2376 -e DOCKER_CERT_PATH=/certs/client -e DOCKER_TLS_VERIFY=1 -v jenkins-docker-certs:/certs/client:ro'
+            ``
           reuseNode true
         }
       }
