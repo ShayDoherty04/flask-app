@@ -45,7 +45,13 @@
 
 pipeline {
     
-    agent any
+    
+agent {
+    docker {
+      image 'python:3.14'
+    }
+  }
+
     // agent {
     //     docker {
     //             image 'docker:24.0-cli'
